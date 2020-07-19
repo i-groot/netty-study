@@ -1,3 +1,4 @@
+1.SimpleChannelInboundHandler和ChannelInboundHandlerAdapter的区别
 SimpleChannelInboundHandler中的channelRead()方法会自动释放接受到来自对方的msg所占有的所有资源
 ChannelInboundHandlerAdapter中的channelRead()方法不会自动释放接受到来自对方的msg所占有的所有资源
 
