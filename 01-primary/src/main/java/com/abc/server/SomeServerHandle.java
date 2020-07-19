@@ -12,6 +12,12 @@ import io.netty.util.CharsetUtil;
 // 需求：用户体骄傲一个请求后，在浏览器上看到hello netty world
 public class SomeServerHandle extends ChannelInboundHandlerAdapter {
 
+    /**
+     * 当Channel中有来自于客户端的数据时就会触发该方法的执行
+     * @param ctx 上下文对象
+     * @param msg 来自客户端的数据
+     * @throws Exception
+     */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 //        super.channelRead(ctx, msg);
@@ -41,7 +47,6 @@ public class SomeServerHandle extends ChannelInboundHandlerAdapter {
             ctx.writeAndFlush(response)
                     // 添加监听器，响应体发送完毕后直接将Channel关闭
                     .addListener(ChannelFutureListener.CLOSE);
-
         }
 
     }
