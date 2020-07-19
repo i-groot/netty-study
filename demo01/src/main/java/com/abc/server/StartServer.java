@@ -10,13 +10,13 @@ import io.netty.handler.codec.http.HttpServerCodec;
 public class StartServer {
     public static void main(String[] args) {
         // 用于处理客户端连接请求，将请求发送给childGroup中的eventLoop
-        NioEventLoopGroup parentGroup = new NioEventLoopGroup();
+        EventLoopGroup parentGroup = new NioEventLoopGroup();
         // 用于处理客户端请求
-        NioEventLoopGroup childGroup = new NioEventLoopGroup();
+        EventLoopGroup childGroup = new NioEventLoopGroup();
 
         // 用户启动ServerChannel
         ServerBootstrap bootstrap = new ServerBootstrap();
-        ServerBootstrap serverBootstrap = bootstrap.group(parentGroup, childGroup) // 指定eventLoopGroup
+        bootstrap.group(parentGroup, childGroup) // 指定eventLoopGroup
                 .channel(NioServerSocketChannel.class) // 指定使用NIO进行通信
                 // 管道初始化器
                 .childHandler(new ChannelInitializer<SocketChannel>() {
@@ -33,10 +33,11 @@ public class StartServer {
                         // pipeline.addLast("name_handle", new HttpServerCodec());// 可以给处理器指定名称，后续可以根据名称操作该处理器
                         pipeline.addLast(new HttpServerCodec());
                         // 将自定义的处理器放入到pipeline的最后
+                        //指定childGroup中eventLoop所绑定的线程索要处理的处理器
                         pipeline.addLast(new CustomServerHandle());
                     }
 
-                });//指定childGroup中eventLoop所绑定的线程索要处理的处理器
+                });
 
         try {
             // 指定当前服务器所监听的端口号
