@@ -10,7 +10,7 @@ import io.netty.util.CharsetUtil;
 
 // 自定义服务器处理器
 // 需求：用户体骄傲一个请求后，在浏览器上看到hello netty world
-public class CustomServerHandle extends ChannelInboundHandlerAdapter {
+public class SomeServerHandle extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {

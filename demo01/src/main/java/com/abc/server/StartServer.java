@@ -34,7 +34,7 @@ public class StartServer {
                         pipeline.addLast(new HttpServerCodec());
                         // 将自定义的处理器放入到pipeline的最后
                         //指定childGroup中eventLoop所绑定的线程索要处理的处理器
-                        pipeline.addLast(new CustomServerHandle());
+                        pipeline.addLast(new SomeServerHandle());
                     }
 
                 });
